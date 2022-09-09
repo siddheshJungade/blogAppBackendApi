@@ -5,4 +5,5 @@ import { AuthenTication } from "../middelware/Authentication.js";
 export const userRouter = Router()
 
 
-userRouter.post('/:userid/following',AuthenTication,userController.setFollowPerson)
+userRouter.post('/:userid/follow',AuthenTication,userController.setAddFollowPerson)
+userRouter.delete('/:userid/unfollow',AuthenTication,userController.setRemoveFollowPerson)

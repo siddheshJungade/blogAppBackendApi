@@ -85,7 +85,27 @@ userController.getGoogleLogin = (req, res) => {
 }
 
 
-userController.setFollowPerson = async (req, res) => {
+userController.setAddFollowPerson = async (req, res) => {
+    try {
+        const user = res.user
+        const followToPerson = await User.findById(req.body.followToPersonId)
+        if (!followToPerson) {
+            res.status(200).json({ message: "no user id" })
+        }
+        const isFollowing = await User.find({ "$and": [{ "_id": user._id }, { "following": { $elemMatch: { userid: followToPerson._id } } }] })
+        if(isFollowing){
+            throw new Error("all ready following")
+        }
+        await followToPerson.updateFollower(user._id)
+        await user.updateFollowing(followToPerson._id)
+        res.status(200).json({ message: "yo are following person" })
+    } catch (err) {
+        res.status(400).json({ error: "invalaid credential catch" })
+        console.log(err)
+    }
+}
+
+userController.setRemoveFollowPerson = async (req, res) => {
     try {
         const user = res.user
         const followToPerson = await User.findById(req.body.followToPersonId)
@@ -96,10 +116,11 @@ userController.setFollowPerson = async (req, res) => {
         if(!isFollowing){
             throw new Error("no previous following")
         }
-        await followToPerson.updateFollower(user._id)
-        await user.updateFollowing(followToPerson._id)
-        res.status(200).json({ message: "yo are following person" })
+        await followToPerson.updateRemoveFollower(user._id)
+        await user.updateRemoveFollowing(followToPerson._id)
+        res.status(200).json({ message: "yo are removed following person" })
     } catch (err) {
+        res.status(400).json({ error: "invalaid credential catch" })
         console.log(err)
     }
 }

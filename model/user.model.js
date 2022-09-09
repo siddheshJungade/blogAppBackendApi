@@ -88,6 +88,26 @@ userSchem.methods.updateFollower = async function (userid) {
     }
 }
 
+userSchem.methods.updateRemoveFollower = async function (userid) {
+    try {
+        console.log(userid)
+        this.followers = await this.followers.filter(item => item.userid != userid)
+        await this.save()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+userSchem.methods.updateRemoveFollowing = async function (userid) {
+    try {
+        this.following = await this.following.filter(item => item.userid != userid)
+        await this.save()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 export const User = model('USER', userSchem)
 
 
