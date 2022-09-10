@@ -6,6 +6,7 @@ const router = Router()
 
 
 
+
 router.use("/auth",authRout)
 router.use("/blogs",blogRouter)
 router.use("/users",userRouter)

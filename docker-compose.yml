@@ -26,6 +26,14 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_MONGODB_PORT: 27017
+  
+  blogapp:
+    image: blogapp:latest
+    container_name: blogapp
+    ports:
+      - 5000:5000
+    networks:
+      - mongo-network
  
 volumes:
   mongo_db:

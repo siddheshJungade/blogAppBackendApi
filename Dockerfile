@@ -3,8 +3,10 @@ FROM node:16
 WORKDIR /server
 COPY package*.json /server
 RUN npm install
-COPY , /server
+COPY . /server
 
 EXPOSE 5000
 
-CMD ["nodemon","server.js"]
+RUN npm install
+
+CMD ["yarn","start"]
