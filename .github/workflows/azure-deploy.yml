@@ -5,7 +5,7 @@ name: azure deploy
 on:
   push:
     branches:
-      - "azure"
+      - azure
     
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - uses: azure/docker-login@v1
       - name: Login to azure ande deploy to az container reg
       - with: 
-          login-server: "blogappcontainerreg.azurecr.io"
+          login-server: blogappcontainerreg.azurecr.io
           username: ${{secerets.AZ_REGESTRY_USER}}
           password: ${{secerets.AZ_REGESTRY_PASSWORD}}
       - run: |
