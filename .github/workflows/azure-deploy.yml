@@ -11,8 +11,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Login to azure ande deploy to az container reg
-        uses: azure/docker-login@v1
+      - uses: azure/docker-login@v1
+        name: Login to azure ande deploy to az container reg
         with: 
           login-server: blogappcontainerreg.azurecr.io
           username: ${{secerets.AZ_REGESTRY_USER}}
