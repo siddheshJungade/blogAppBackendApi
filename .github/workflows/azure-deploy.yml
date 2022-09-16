@@ -5,7 +5,8 @@ name: azure deploy
 on:
   push:
     branches:
-      - "master"
+      - "azure"
+    
 permissions:
   contents: read
 
