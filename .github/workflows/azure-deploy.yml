@@ -15,8 +15,8 @@ jobs:
         name: Login to azure ande deploy to az container reg
         with: 
           login-server: blogappcontainerreg.azurecr.io
-          username: ${{secerets.AZ_REGESTRY_USER}}
-          password: ${{secerets.AZ_REGESTRY_PASSWORD}}
+          username: ${{secrets.AZ_REGESTRY_USER}}
+          password: ${{secrets.AZ_REGESTRY_PASSWORD}}
       
       - run: |
           docker build --file Dockerfile --tag blogappcontainerreg.azurecr.io/blogApi:${{ github.sha }} .
