@@ -36,6 +36,4 @@ const BlogSchem = new Schema({
         default: new Date()
     }
 })
-
-
 export const Blog = model('blog',BlogSchem) 

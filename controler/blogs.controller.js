@@ -1,11 +1,11 @@
 import { Blog } from "../model/blog.model.js"
 
 export const blogsController = {
-    createPost: (req, res) => {
+    createPost: async (req, res) => {
         try {
             const file = req.files.file
-            const { title, content, auther } = JSON.parse(req.body.blog)
-            auther = req.params.username
+            const { title, content } = JSON.parse(req.body.blog)
+            const auther = req.params.username
             if (!title || !auther || !content) {
                 res.status(400).json({ error: "filed contain properly plz" })
             }
@@ -15,10 +15,10 @@ export const blogsController = {
             blogpost.thumbnail.data = file.data,
                 blogpost.thumbnail.contentType = file.mimtype
             blogpost.thumbnail.imageName = file.name
-            blogpost.save()
+            await blogpost.save()
             res.status(200).json({ message: "new blog added" })
         } catch (e) {
-            res.status(400).json({ error: "unauthorize acess" })
+            res.status(400).json({ error: "somthing went Wrong" })
             console.log(e)
         }
     },
