@@ -1,7 +1,6 @@
 
 
-name: azure deploy
-
+name: azure-deploy
 on:
   push:
     branches:
