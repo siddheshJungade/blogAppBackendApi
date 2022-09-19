@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: check out code
+        uses:  actions/checkout@v2
+      
       - uses: azure/docker-login@v1
         name: Login to azure ande deploy to az container reg
         with: 
@@ -19,7 +22,7 @@ jobs:
           password: ${{secrets.AZ_REGESTRY_PASSWORD}}
       
       - run: |
-          ls -a 
-
+          docker build . -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
+          docker push blogappcontainerregistry.azurecr.io/blogApi:${{ github.sha }}
 
       
