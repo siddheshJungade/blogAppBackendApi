@@ -19,7 +19,7 @@ jobs:
           password: ${{secrets.AZ_REGESTRY_PASSWORD}}
       
       - run: |
-          docker build -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} . 
+          ls -a 
 
 
       
