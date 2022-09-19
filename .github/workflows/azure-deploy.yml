@@ -28,13 +28,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    steps:
-      - uses: azure/docker-login@v1
-        name: Login to azure ande deploy to az container reg
-        with: 
-          login-server: blogappcontainerreg.azurecr.io
-          username: ${{secrets.AZ_REGESTRY_USER}}
-          password: ${{secrets.AZ_REGESTRY_PASSWORD}}
-      
+    steps:      
       - run: |
           docker pull blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
