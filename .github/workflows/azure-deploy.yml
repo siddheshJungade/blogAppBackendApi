@@ -6,35 +6,36 @@ on:
   push:
     branches:
       - azure
-    
+
+env: 
+  AZURE_WEBAPP_NAME: blognodebackendApi
+  
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: check out code
         uses:  actions/checkout@v2
       
+      - name: Azure Auth
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - uses: azure/docker-login@v1
         name: Login to azure ande deploy to az container reg
         with: 
           login-server: blogappcontainerreg.azurecr.io
           username: ${{secrets.AZ_REGESTRY_USER}}
           password: ${{secrets.AZ_REGESTRY_PASSWORD}}
-      
       - run: |
           docker build . -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
           docker push blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: azure/docker-login@v1
-        name: Login to azure ande deploy to az container reg
-        with: 
-          login-server: blogappcontainerreg.azurecr.io
-          username: ${{secrets.AZ_REGESTRY_USER}}
-          password: ${{secrets.AZ_REGESTRY_PASSWORD}}
       
-      - run: |
-          docker pull blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
+      - name: deploy to Azure app sercices
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+          image: blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }}
