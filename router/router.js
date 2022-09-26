@@ -6,7 +6,9 @@ const router = Router()
 
 
 
-
+router.use("/",(req,res) => {
+    return res.json({message: `api working sucessfully`})
+})
 router.use("/auth",authRout)
 router.use("/blogs",blogRouter)
 router.use("/users",userRouter)

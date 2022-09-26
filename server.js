@@ -19,7 +19,8 @@ app.use(fileUpload())
 
 app.use("/",routLog,router)
 
-app.listen(process.env.PORT,()=>{
+const port = process.env.PORT || 8000
+app.listen(port,()=>{
     db()
-    console.log(`Server is Runing on http://localhost:${process.env.PORT}`)
+    console.log(`Server is Runing on http://localhost:${port}`)
 })
