@@ -30,11 +30,14 @@ jobs:
           username: ${{secrets.AZ_REGESTRY_USER}}
           password: ${{secrets.AZ_REGESTRY_PASSWORD}}
       - run: |
-          docker build . -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
-          docker push blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
+          docker build . -t blogappcontainerreg.azurecr.io/blogapi:latest
+          docker push blogappcontainerreg.azurecr.io/blogapi:latest
+          # docker build . -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
+          # docker push blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
       
       - name: deploy to Azure app sercices
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} 
-          image: blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }}
+          # image: blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }}
+          image: blogappcontainerreg.azurecr.io/blogapi:latest
