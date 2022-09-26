@@ -8,7 +8,7 @@ on:
       - azure
 
 env: 
-  AZURE_WEBAPP_NAME: blognodebackendApi
+  AZURE_WEBAPP_NAME: 'blognodebackendApi'
 
 jobs:
   build:
