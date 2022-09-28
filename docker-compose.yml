@@ -8,7 +8,12 @@ services:
       - 5000:5000
     networks:
       - mongo-network
- 
+    environment:
+      - DB=${DB}
+      - SCREATKEY=${SCREATKEY}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - PORT=${PORT}
 volumes:
   mongo_db:
 

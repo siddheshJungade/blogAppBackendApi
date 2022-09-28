@@ -21,6 +21,7 @@ app.use("/",routLog,router)
 
 const port = process.env.PORT || 5000
 app.listen(port,()=>{
+    console.log("env",process.env.NAME)
     db()
     console.log(`Server is Runing on http://localhost:${port}`)
 })
