@@ -41,7 +41,7 @@ jobs:
           keyvault: 'keyvaultblogapp'
           secrets: 'GOOGLECLIENTSECRET,SCREATKEY'
         id: azureKeyVault
-      - name: Get KEy valt output
+      - name: Get Key valt output
         run: |
           echo ${{steps.azureKeyVault.output.GOOGLECLIENTSECRET}}
           echo ${{steps.azureKeyVault.output.SCREATKEY}}
