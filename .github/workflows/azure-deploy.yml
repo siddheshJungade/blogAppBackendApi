@@ -34,7 +34,18 @@ jobs:
           docker push blogappcontainerreg.azurecr.io/blogapi:latest
           # docker build . -t blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
           # docker push blogappcontainerreg.azurecr.io/blogapi:${{ github.sha }} 
-      
+        
+      - name: Get Data From azure key valt
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: 'keyvaultblogapp'
+          secrets: 'GOOGLECLIENTSECRET,SCREATKEY'
+        id: azureKeyVault
+      - name: Get KEy valt output
+        run: |
+          echo ${{steps.azureKeyVault.output.GOOGLECLIENTSECRET}}
+          echo ${{steps.azureKeyVault.output.SCREATKEY}}
+
       - name: deploy to Azure app sercices
         uses: azure/webapps-deploy@v2
         with:
